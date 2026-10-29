@@ -1,18 +1,20 @@
 name: Taxnele Smart Breaker
 products:
   - id: gvxvhlgqlm3bbzwt
+    manufactorer: Taxnele
+    model: TVPS1-63FW
 entities:
   - entity: sensor
     name: Total Energy
     class: energy
-    category: diagnostic
-    icon: mdi:lightning-bolt
     dps:
       - id: 1
         type: integer
         name: sensor
         unit: kWh
-        scale: 0.01
+        class: total_increasing
+        mapping:
+          - scale: 100
 
   - entity: sensor
     class: voltage
@@ -20,8 +22,8 @@ entities:
     dps:
       - id: 6
         type: base64
-        optional: true
         name: sensor
+        optional: true
         unit: V
         class: measurement
         mask: "FFFF000000000000"
@@ -34,8 +36,8 @@ entities:
     dps:
       - id: 6
         type: base64
-        optional: true
         name: sensor
+        optional: true
         unit: A
         class: measurement
         mask: "0000FFFFFF000000"
@@ -50,142 +52,142 @@ entities:
         type: base64
         name: sensor
         optional: true
-        unit: W
+        unit: kW
         class: measurement
         mask: "0000000000FFFFFF"
-
-  - entity: sensor
-    name: Balance Energy
-    class: energy
-    category: diagnostic
-    icon: mdi:scale-balance
-    dps:
-      - id: 13
-        type: integer
-        name: sensor
-        unit: kWh
-        scale: 0.01
-
-  - entity: sensor
-    name: Energy Charge
-    class: energy
-    category: diagnostic
-    icon: mdi:credit-card-flash
-    dps:
-      - id: 14
-        type: integer
-        name: sensor
-        unit: kWh
-        scale: 0.01
-
-  - entity: sensor
-    name: Leakage Current
-    category: diagnostic
-    icon: mdi:current-ac
-    dps:
-      - id: 15
-        type: integer
-        name: sensor
-        unit: mA
-
-  - entity: switch
-    name: Breaker
-    icon: mdi:circuit-breaker
-    dps:
-      - id: 16
-        type: boolean
-        name: switch
-      - id: 101
-        type: string
-        name: relay_status
         mapping:
-          - dps_val: "off"
-              value: "off"
-          - dps_val: "on"
-              value: "on"
-          - dps_val: "memory"
-              value: "memory"
-
-  - entity: sensor
-    name: Temperature Zone 1
-    class: temperature
-    category: diagnostic
-    icon: mdi:thermometer
-    dps:
-      - id: 25
-        type: integer
-        name: sensor
-        unit: °C
-
-  - entity: sensor
-    name: Temperature Zone 3 / Current
-    category: diagnostic
-    icon: mdi:amperage
-    dps:
-      - id: 27
-        type: integer
-        name: sensor
-        unit: A
-
-  - entity: sensor
-    name: Supply Frequency
-    class: frequency
-    category: diagnostic
-    icon: mdi:sine-wave
-    dps:
-      - id: 32
-        type: integer
-        name: sensor
-        unit: Hz
-        scale: 0.1
-
-  - entity: sensor
-    name: Power Factor
-    class: power_factor
-    category: diagnostic
-    icon: mdi:angle-acute
-    dps:
-      - id: 50
-        type: integer
-        name: sensor
-        scale: 0.01
+          - scale: 1000
 
   - entity: binary_sensor
-    name: Fault Status
     class: problem
     category: diagnostic
-    icon: mdi:alert-octagon
     dps:
       - id: 9
         type: bitfield
         name: sensor
+        mapping:
+          - dps_val: 0
+            value: false
+          - value: true
+      - id: 9
+        type: bitfield
+        name: fault_code
 
   - entity: switch
-    name: Prepayment Switch
+    name: Prepayment
     category: config
-    icon: mdi:cash-register
+    icon: "mdi:cash-multiple"
     dps:
       - id: 11
         type: boolean
         name: switch
 
-  - entity: switch
+  - entity: button
     name: Clear Energy
     category: config
-    icon: mdi:refresh
+    class: restart
     dps:
       - id: 12
         type: boolean
-        name: switch
+        name: button
+
+  - entity: sensor
+    name: Energy Balance
+    category: diagnostic
+    dps:
+      - id: 13
+        type: integer
+        name: sensor
+        unit: kWh
+        class: measurement
+        mapping:
+          - scale: 100
+
+  - entity: number
+    name: Energy Charge
+    category: config
+    icon: "mdi:cash"
+    dps:
+      - id: 14
+        type: integer
+        name: value
+        optional: true
+        unit: kWh
+        range:
+          min: 0
+          max: 999999
+        mapping:
+          - scale: 100
+
+  - entity: sensor
+    translation_key: leakage_current
+    class: current
+    category: diagnostic
+    dps:
+      - id: 15
+        type: integer
+        name: sensor
+        unit: mA
+        class: measurement
 
   - entity: switch
-    name: Child Lock
+    name: Circuit Breaker
+    icon: "mdi:fuse"
     category: config
-    icon: mdi:lock
+    dps:
+      - id: 16
+        type: boolean
+        name: switch
+
+ - entity: button
+    name: Leakage Test
+    icon: "mdi:current-ac"
+    category: config
+    dps:
+      - id: 22
+        type: boolean
+        name: button
+        optional: true
+
+  - entity: sensor
+    class: temperature
+    category: diagnostic
+    dps:
+      - id: 25
+        type: integer
+        name: sensor
+        unit: C
+        class: measurement
+
+  - entity: sensor
+    class: frequency
+    category: diagnostic
+    dps:
+      - id: 32
+        type: integer
+        name: sensor
+        unit: Hz
+        class: measurement
+        mapping:
+          - scale: 10
+
+  - entity: button
+    translation_key: factory_reset
+    category: config
+    hidden: true
+    dps:
+      - id: 34
+        type: boolean
+        name: button
+        optional: true
+
+  - entity: lock
+    translation_key: child_lock
+    category: config
     dps:
       - id: 36
         type: boolean
-        name: switch
+        name: lock
 
   - entity: switch
     name: Auto Reclosing
@@ -196,14 +198,42 @@ entities:
         type: boolean
         name: switch
 
+  - entity: sensor
+    class: power_factor
+    category: diagnostic
+    dps:
+      - id: 50
+        type: integer
+        name: sensor
+        unit: "%"
+        class: measurement
+        mapping:
+          - scale: 100
+
+  - entity: select
+    translation_key: initial_state
+    category: config
+    dps:
+      - id: 101
+        type: string
+        name: option
+        mapping:
+          - dps_val: "0ff"
+            value: "off"
+          - dps_val: "on"
+            value: "on"
+          - dps_val: "memory"
+            value: memory
+
   - entity: number
-    name: Countdown
+    name: Countdown Delay
     category: config
     icon: mdi:timer-sand
     dps:
       - id: 102
         type: integer
         name: value
+        optional: true
         unit: s
         range:
           min: 0
@@ -212,26 +242,13 @@ entities:
   - entity: number
     name: Recloser Delay
     category: config
-    icon: mdi:clock-start
+    icon: mdi:clock_start
     dps:
       - id: 108
         type: integer
         name: value
+        optional: true
         unit: s
         range:
           min: 0
           max: 500
-
-  - entity: select
-    name: Max Residual Phase
-    category: config
-    icon: mdi:source-branch
-    dps:
-      - id: 44
-        type: string
-        name: select
-        mapping:
-          - dps_val: item_1
-          - dps_val: item_2
-          - dps_val: item_3
-          - dps_val: none
