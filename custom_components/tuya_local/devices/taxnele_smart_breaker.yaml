@@ -162,7 +162,7 @@ entities:
   - entity: sensor
     name: Time-limited current
     category: diagnostic
-    icon: mdi:amperage
+    icon: "mdi:current-ac"
     dps:
       - id: 27
         type: integer
@@ -206,7 +206,7 @@ entities:
   - entity: switch
     name: Maintenance lock
     category: config
-    icon: mdi:lock
+    icon: "mdi:lock"
     dps:
       - id: 36
         type: boolean
@@ -215,7 +215,7 @@ entities:
   - entity: switch
     name: Automatic closing switch
     category: config
-    icon: mdi:autorenew
+    icon: "mdi:autorenew"
     dps:
       - id: 49
         type: boolean
@@ -263,7 +263,7 @@ entities:
           max: 500
 
   - entity: number
-    name: Recloser Delay
+    name: Recloser delay
     category: config
     icon: "mdi:clock-start"
     dps:
