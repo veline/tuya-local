@@ -5,7 +5,7 @@ products:
     model: TVPS1-63FW
 entities:
   - entity: sensor
-    name: Total Energy
+    name: Total energy
     class: energy
     dps:
       - id: 1
@@ -83,7 +83,7 @@ entities:
         name: switch
 
   - entity: button
-    name: Clear Energy
+    name: Clear energy
     category: config
     class: restart
     dps:
@@ -92,7 +92,7 @@ entities:
         name: button
 
   - entity: sensor
-    name: Energy Balance
+    name: Energy balance
     category: diagnostic
     dps:
       - id: 13
@@ -104,7 +104,7 @@ entities:
           - scale: 100
 
   - entity: number
-    name: Energy Charge
+    name: Energy charge
     category: config
     icon: "mdi:cash"
     dps:
@@ -131,7 +131,7 @@ entities:
         class: measurement
 
   - entity: switch
-    name: Circuit Breaker
+    name: Circuit breaker
     icon: "mdi:fuse"
     category: config
     dps:
@@ -140,7 +140,7 @@ entities:
         name: switch
 
   - entity: button
-    name: Leakage Test
+    name: Leakage test
     icon: "mdi:current-ac"
     category: config
     dps:
@@ -181,16 +181,17 @@ entities:
         name: button
         optional: true
 
-  - entity: lock
-    translation_key: child_lock
+  - entity: switch
+    name: Maintenance lock
     category: config
+    icon: mdi:lock
     dps:
       - id: 36
         type: boolean
-        name: lock
+        name: switch
 
   - entity: switch
-    name: Auto Reclosing
+    name: Auto reclosing
     category: config
     icon: mdi:autorenew
     dps:
@@ -226,9 +227,9 @@ entities:
             value: memory
 
   - entity: number
-    name: Countdown Delay
+    name: Countdown delay
     category: config
-    icon: mdi:timer-sand
+    icon: "mdi:timer-sand"
     dps:
       - id: 102
         type: integer
@@ -242,7 +243,7 @@ entities:
   - entity: number
     name: Recloser Delay
     category: config
-    icon: mdi:clock_start
+    icon: "mdi:clock-start"
     dps:
       - id: 108
         type: integer
