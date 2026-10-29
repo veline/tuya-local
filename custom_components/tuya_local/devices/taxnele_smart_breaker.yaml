@@ -5,7 +5,7 @@ products:
     model: TVPS1-63FW
 entities:
   - entity: sensor
-    name: Total energy
+    name: Forward active energy
     class: energy
     dps:
       - id: 1
@@ -74,7 +74,7 @@ entities:
         name: fault_code
 
   - entity: switch
-    name: Prepayment
+    name: Prepayment switch
     category: config
     icon: "mdi:cash-multiple"
     dps:
@@ -83,7 +83,7 @@ entities:
         name: switch
 
   - entity: button
-    name: Clear energy
+    name: Clear balance
     category: config
     class: restart
     dps:
@@ -92,7 +92,7 @@ entities:
         name: button
 
   - entity: sensor
-    name: Energy balance
+    name: Balance energy
     category: diagnostic
     dps:
       - id: 13
@@ -160,6 +160,17 @@ entities:
         class: measurement
 
   - entity: sensor
+    name: Time-limited current
+    category: diagnostic
+    icon: mdi:amperage
+    dps:
+      - id: 27
+        type: integer
+        name: sensor
+        unit: A
+        class: measurement
+
+  - entity: sensor
     class: frequency
     category: diagnostic
     dps:
@@ -181,6 +192,17 @@ entities:
         name: button
         optional: true
 
+  - entity: button
+    name: Refresh sensors
+    class: restart
+    category: config
+    dps:
+      - id: 35
+        type: string
+        name: button
+        optional: true
+        value: "online"
+
   - entity: switch
     name: Maintenance lock
     category: config
@@ -191,7 +213,7 @@ entities:
         name: switch
 
   - entity: switch
-    name: Auto reclosing
+    name: Automatic closing switch
     category: config
     icon: mdi:autorenew
     dps:
@@ -212,7 +234,7 @@ entities:
           - scale: 100
 
   - entity: select
-    translation_key: initial_state
+    name: Relay status
     category: config
     dps:
       - id: 101
@@ -227,7 +249,7 @@ entities:
             value: memory
 
   - entity: number
-    name: Countdown delay
+    name: Countdowns
     category: config
     icon: "mdi:timer-sand"
     dps:
@@ -248,7 +270,6 @@ entities:
       - id: 108
         type: integer
         name: value
-        optional: true
         unit: s
         range:
           min: 0
