@@ -218,7 +218,7 @@ entities:
         type: string
         name: option
         mapping:
-          - dps_val: "0ff"
+          - dps_val: "off"
             value: "off"
           - dps_val: "on"
             value: "on"
