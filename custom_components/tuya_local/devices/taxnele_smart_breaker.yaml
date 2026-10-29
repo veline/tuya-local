@@ -139,7 +139,7 @@ entities:
         type: boolean
         name: switch
 
- - entity: button
+  - entity: button
     name: Leakage Test
     icon: "mdi:current-ac"
     category: config
