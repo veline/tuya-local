@@ -262,15 +262,15 @@ entities:
           min: 0
           max: 500
 
-  - entity: number
-    name: Recloser delay
-    category: config
-    icon: "mdi:clock-start"
-    dps:
-      - id: 108
-        type: integer
-        name: value
-        unit: s
-        range:
-          min: 0
-          max: 500
+#  - entity: number
+#    name: Recloser delay
+#    category: config
+#    icon: "mdi:clock-start"
+#    dps:
+#      - id: 108
+#        type: integer
+#        name: value
+#        unit: s
+#        range:
+#          min: 0
+#          max: 500
