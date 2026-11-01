@@ -2,7 +2,7 @@ name: Advanced energy monitoring smartplug
 products:
   - id: 9y0qx7npuny0pnwt
     manufacturer: Fayibuy
-    model: LN 20A
+    model: 20A
 entities:
   - entity: switch
     class: outlet
