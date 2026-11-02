@@ -45,6 +45,7 @@ entities:
         type: integer
         name: sensor
         optional: true
+        force: true
         unit: Wh
         class: total_increasing
       - id: 25
