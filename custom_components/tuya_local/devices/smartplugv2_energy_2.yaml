@@ -47,6 +47,7 @@ entities:
         optional: true
         unit: kWh
         class: total_increasing
+        force: true
         mapping:
             - scale: 1000
       - id: 25
@@ -62,6 +63,7 @@ entities:
         name: sensor
         type: integer
         class: measurement
+        force: true
         unit: A
         mapping:
             - scale: 1000
@@ -77,6 +79,7 @@ entities:
         name: sensor
         type: integer
         class: measurement
+        force: true
         unit: kW
         mapping:
           - scale: 10000
@@ -92,6 +95,7 @@ entities:
         name: sensor
         type: integer
         class: measurement
+        force: true
         unit: V
         mapping:
           - scale: 10
