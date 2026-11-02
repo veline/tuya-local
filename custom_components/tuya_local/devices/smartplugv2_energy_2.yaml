@@ -45,9 +45,10 @@ entities:
         type: integer
         name: sensor
         optional: true
-        force: true
-        unit: Wh
+        unit: kWh
         class: total_increasing
+        mapping:
+            - scale: 1000
       - id: 25
         type: integer
         name: calibration
@@ -61,8 +62,9 @@ entities:
         name: sensor
         type: integer
         class: measurement
-        force: true
-        unit: mA
+        unit: A
+        mapping:
+            - scale: 1000
       - id: 23
         type: integer
         name: calibration
@@ -75,10 +77,9 @@ entities:
         name: sensor
         type: integer
         class: measurement
-        force: true
-        unit: W
+        unit: kW
         mapping:
-          - scale: 10
+          - scale: 10000
       - id: 24
         type: integer
         name: calibration
@@ -91,7 +92,6 @@ entities:
         name: sensor
         type: integer
         class: measurement
-        force: true
         unit: V
         mapping:
           - scale: 10
